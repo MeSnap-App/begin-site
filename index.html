@@ -332,6 +332,23 @@
       z-index: 2;
     }
 
+    .centered-promo {
+      text-align: center;
+      margin-bottom: 2rem;
+      padding: 0 1rem;
+    }
+
+    .centered-promo-text {
+      background: #7F00FF;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border-radius: 25px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      display: inline-block;
+      box-shadow: 0 4px 15px rgba(127, 0, 255, 0.3);
+    }
+
     @media (max-width: 767px) {
       .promo-text {
         display: none;
@@ -343,6 +360,11 @@
 
       .promo-container {
         justify-content: flex-end;
+      }
+
+      .centered-promo-text {
+        font-size: 0.8rem;
+        padding: 0.6rem 1.2rem;
       }
     }
 
@@ -377,7 +399,7 @@
     <header class="header">
       <a href="https://mesnap.app" class="logo" target="_blank">MeSnap</a>
       <div class="promo-container">
-        <div class="promo-text">Tag us on Instagram for 30% off your next order!</div>
+        <div class="promo-text">Tag @mesnap.app on Instagram for 30% off your next order!</div>
         <div class="promo-arrow">→</div>
         <div class="social-links">
           <a href="https://instagram.com/mesnap.app" class="social-link" target="_blank">
@@ -390,6 +412,10 @@
       </div>
     </header>
 
+    <div class="centered-promo">
+      <div class="centered-promo-text">Tag @mesnap.app on Instagram for 30% off your next order!</div>
+    </div>
+
     <div class="form-container">
       <h1 class="form-title">Setup Your MeSnap</h1>
       <form id="mesnap-form">
@@ -397,6 +423,12 @@
           <label for="email" class="form-label">Purchase Email</label>
           <div class="form-info">This is the email your receipt was sent to</div>
           <input type="email" id="email" class="form-input" required placeholder="you@example.com" />
+        </div>
+
+        <div class="form-group">
+          <label for="username" class="form-label">Username</label>
+          <div class="form-info">Your preferred username or handle (optional)</div>
+          <input type="text" id="username" class="form-input" placeholder="@username" />
         </div>
 
         <div class="form-group">
@@ -425,6 +457,7 @@
 
   <script>
     const emailInput = document.getElementById("email");
+    const usernameInput = document.getElementById("username");
     const linkInput = document.getElementById("link");
     const commentsInput = document.getElementById("comments");
     const whatsappBtn = document.getElementById("whatsapp-button");
@@ -444,18 +477,19 @@
       }
     });
 
-    function encodeMessage(email, link, comments) {
-      const rawMessage = `MeSnap Setup Request:\nEmail: ${email}\nLink: ${link}\nComments: ${comments || "None"}`;
+    function encodeMessage(email, username, link, comments) {
+      const rawMessage = `MeSnap Setup Request:\nEmail: ${email}\nUsername: ${username || "None"}\nLink: ${link}\nComments: ${comments || "None"}`;
       return `https://wa.me/447918800632?text=${encodeURIComponent(rawMessage)}`;
     }
 
-    function generateEmailLink(email, link, comments) {
+    function generateEmailLink(email, username, link, comments) {
       const subject = "MeSnap Setup Request";
       const body = `Hello,
 
 I would like to set up my MeSnap with the following details:
 
 Email: ${email}
+Username: ${username || "None"}
 Link: ${link}
 Comments: ${comments || "None"}
 
@@ -466,6 +500,7 @@ Thank you!`;
 
     function updateButtons() {
       const email = emailInput.value.trim();
+      const username = usernameInput.value.trim();
       const link = linkInput.value.trim();
       const comments = commentsInput.value.trim();
 
@@ -474,13 +509,13 @@ Thank you!`;
 
       if (emailValid && linkValid) {
         // Enable WhatsApp button
-        whatsappBtn.href = encodeMessage(email, link, comments);
+        whatsappBtn.href = encodeMessage(email, username, link, comments);
         whatsappBtn.removeAttribute("disabled");
         whatsappBtn.style.pointerEvents = "auto";
         whatsappBtn.style.opacity = "1";
 
         // Enable Email button
-        emailBtn.href = generateEmailLink(email, link, comments);
+        emailBtn.href = generateEmailLink(email, username, link, comments);
         emailBtn.removeAttribute("disabled");
         emailBtn.style.pointerEvents = "auto";
         emailBtn.style.opacity = "1";
