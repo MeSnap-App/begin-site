@@ -7,7 +7,9 @@
   <title>MeSnap Setup</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
   <style>
     :root {
       --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -67,7 +69,7 @@
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      background: #7F00FF;
+      background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -75,11 +77,94 @@
       color: white;
       font-size: 1.2rem;
       transition: all 0.3s ease;
+      padding: 8px;
     }
 
     .social-link:hover {
-      background: #6200C9;
       transform: scale(1.1);
+      box-shadow: 0 4px 15px rgba(188, 24, 136, 0.3);
+    }
+
+    .instagram-icon {
+      width: 24px;
+      height: 24px;
+      fill: white;
+    }
+
+    .promo-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .promo-arrow {
+      position: absolute;
+      right: 50px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.5rem;
+      color: #7F00FF;
+      animation: bounce 2s infinite;
+    }
+
+    .promo-text {
+      position: absolute;
+      right: 60px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #7F00FF;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      white-space: nowrap;
+      box-shadow: 0 4px 15px rgba(127, 0, 255, 0.3);
+      animation: pulse 3s infinite;
+    }
+
+    .promo-text::after {
+      content: '';
+      position: absolute;
+      left: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+      border: 8px solid transparent;
+      border-left-color: #7F00FF;
+    }
+
+    @keyframes bounce {
+
+      0%,
+      20%,
+      50%,
+      80%,
+      100% {
+        transform: translateY(-50%);
+      }
+
+      40% {
+        transform: translateY(-70%);
+      }
+
+      60% {
+        transform: translateY(-60%);
+      }
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: translateY(-50%) scale(1);
+      }
+
+      50% {
+        transform: translateY(-50%) scale(1.05);
+      }
+
+      100% {
+        transform: translateY(-50%) scale(1);
+      }
     }
 
     .form-container {
@@ -189,6 +274,78 @@
       pointer-events: none !important;
     }
 
+    .email-btn {
+      font-family: var(--font-heading);
+      margin-top: 1rem;
+      display: block;
+      width: 100%;
+      background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+      color: white;
+      font-weight: 600;
+      padding: 1rem;
+      text-align: center;
+      border: none;
+      border-radius: 15px;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+    }
+
+    .email-btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
+    }
+
+    .email-btn:disabled,
+    .email-btn[disabled] {
+      background: #cccccc !important;
+      cursor: not-allowed !important;
+      transform: none !important;
+      box-shadow: none !important;
+      pointer-events: none !important;
+    }
+
+    .button-divider {
+      text-align: center;
+      margin: 1rem 0;
+      color: #888888;
+      font-size: 0.9rem;
+      position: relative;
+    }
+
+    .button-divider::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: #e0e0e0;
+      z-index: 1;
+    }
+
+    .button-divider span {
+      background: white;
+      padding: 0 1rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    @media (max-width: 767px) {
+      .promo-text {
+        display: none;
+      }
+
+      .promo-arrow {
+        display: none;
+      }
+
+      .promo-container {
+        justify-content: flex-end;
+      }
+    }
+
     @media (min-width: 768px) {
       .container {
         padding: 2rem;
@@ -201,7 +358,7 @@
       .form-title {
         font-size: 2.2rem;
       }
-      
+
       .logo {
         font-size: 1.8rem;
       }
@@ -219,8 +376,17 @@
   <div class="container">
     <header class="header">
       <a href="https://mesnap.app" class="logo" target="_blank">MeSnap</a>
-      <div class="social-links">
-        <a href="https://instagram.com/mesnap" class="social-link" target="_blank">📷</a>
+      <div class="promo-container">
+        <div class="promo-text">Tag us on Instagram for 30% off your next order!</div>
+        <div class="promo-arrow">→</div>
+        <div class="social-links">
+          <a href="https://instagram.com/mesnap.app" class="social-link" target="_blank">
+            <svg class="instagram-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+            </svg>
+          </a>
+        </div>
       </div>
     </header>
 
@@ -235,17 +401,24 @@
 
         <div class="form-group">
           <label for="link" class="form-label">MeSnap Link</label>
-          <div class="form-info">The link you want when you tap the MeSnap against someone else's phone with NFC</div>
+          <div class="form-info">The link you want when you tap the MeSnap against someone else's phone with NFC (you
+            can always change this later)</div>
           <input type="text" id="link" class="form-input" required placeholder="yourlink.com" />
         </div>
 
         <div class="form-group">
           <label for="comments" class="form-label">Extra Comments</label>
-          <textarea id="comments" class="form-input form-textarea" maxlength="120" placeholder="Optional (max 120 characters)"></textarea>
+          <textarea id="comments" class="form-input form-textarea" maxlength="120" placeholder="Optional"></textarea>
           <div class="char-counter"><span id="char-count">0</span>/120 characters</div>
         </div>
 
         <a id="whatsapp-button" href="#" class="submit-btn" target="_blank">Send via WhatsApp</a>
+
+        <div class="button-divider">
+          <span>or</span>
+        </div>
+
+        <a id="email-button" href="#" class="email-btn">Send via Email</a>
       </form>
     </div>
   </div>
@@ -255,12 +428,13 @@
     const linkInput = document.getElementById("link");
     const commentsInput = document.getElementById("comments");
     const whatsappBtn = document.getElementById("whatsapp-button");
+    const emailBtn = document.getElementById("email-button");
     const charCount = document.getElementById("char-count");
 
     commentsInput.addEventListener("input", () => {
       const currentLength = commentsInput.value.length;
       charCount.textContent = currentLength;
-      
+
       if (currentLength > 100) {
         charCount.style.color = "#FF9500";
       } else if (currentLength > 80) {
@@ -275,31 +449,60 @@
       return `https://wa.me/447918800632?text=${encodeURIComponent(rawMessage)}`;
     }
 
-    function updateWhatsAppButton() {
+    function generateEmailLink(email, link, comments) {
+      const subject = "MeSnap Setup Request";
+      const body = `Hello,
+
+I would like to set up my MeSnap with the following details:
+
+Email: ${email}
+Link: ${link}
+Comments: ${comments || "None"}
+
+Thank you!`;
+
+      return `mailto:admin@mesnap.app?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    }
+
+    function updateButtons() {
       const email = emailInput.value.trim();
       const link = linkInput.value.trim();
       const comments = commentsInput.value.trim();
-      
+
       const emailValid = email && emailInput.checkValidity();
       const linkValid = link.length > 0;
-      
+
       if (emailValid && linkValid) {
+        // Enable WhatsApp button
         whatsappBtn.href = encodeMessage(email, link, comments);
         whatsappBtn.removeAttribute("disabled");
         whatsappBtn.style.pointerEvents = "auto";
         whatsappBtn.style.opacity = "1";
+
+        // Enable Email button
+        emailBtn.href = generateEmailLink(email, link, comments);
+        emailBtn.removeAttribute("disabled");
+        emailBtn.style.pointerEvents = "auto";
+        emailBtn.style.opacity = "1";
       } else {
+        // Disable WhatsApp button
         whatsappBtn.href = "#";
         whatsappBtn.setAttribute("disabled", "disabled");
         whatsappBtn.style.pointerEvents = "none";
         whatsappBtn.style.opacity = "0.6";
+
+        // Disable Email button
+        emailBtn.href = "#";
+        emailBtn.setAttribute("disabled", "disabled");
+        emailBtn.style.pointerEvents = "none";
+        emailBtn.style.opacity = "0.6";
       }
     }
 
-    document.getElementById("mesnap-form").addEventListener("input", updateWhatsAppButton);
-    document.getElementById("mesnap-form").addEventListener("change", updateWhatsAppButton);
+    document.getElementById("mesnap-form").addEventListener("input", updateButtons);
+    document.getElementById("mesnap-form").addEventListener("change", updateButtons);
 
-    updateWhatsAppButton();
+    updateButtons();
   </script>
 </body>
 
