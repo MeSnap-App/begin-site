@@ -425,11 +425,6 @@
           <input type="email" id="email" class="form-input" required placeholder="you@example.com" />
         </div>
 
-        <div class="form-group">
-          <label for="username" class="form-label">Username</label>
-          <div class="form-info">Your preferred username or handle (optional)</div>
-          <input type="text" id="username" class="form-input" placeholder="@username" />
-        </div>
 
         <div class="form-group">
           <label for="link" class="form-label">MeSnap Link</label>
@@ -440,8 +435,8 @@
 
         <div class="form-group">
           <label for="comments" class="form-label">Extra Comments</label>
-          <textarea id="comments" class="form-input form-textarea" maxlength="120" placeholder="Optional"></textarea>
-          <div class="char-counter"><span id="char-count">0</span>/120 characters</div>
+          <textarea id="comments" class="form-input form-textarea" maxlength="300" placeholder="Optional"></textarea>
+          <div class="char-counter"><span id="char-count">0</span>/300 characters</div>
         </div>
 
         <a id="whatsapp-button" href="#" class="submit-btn" target="_blank">Send via WhatsApp</a>
@@ -457,7 +452,6 @@
 
   <script>
     const emailInput = document.getElementById("email");
-    const usernameInput = document.getElementById("username");
     const linkInput = document.getElementById("link");
     const commentsInput = document.getElementById("comments");
     const whatsappBtn = document.getElementById("whatsapp-button");
@@ -477,19 +471,18 @@
       }
     });
 
-    function encodeMessage(email, username, link, comments) {
-      const rawMessage = `MeSnap Setup Request:\nEmail: ${email}\nUsername: ${username || "None"}\nLink: ${link}\nComments: ${comments || "None"}`;
+    function encodeMessage(email, link, comments) {
+      const rawMessage = `MeSnap Setup Request:\nEmail: ${email}\nLink: ${link}\nComments: ${comments || "None"}`;
       return `https://wa.me/447918800632?text=${encodeURIComponent(rawMessage)}`;
     }
 
-    function generateEmailLink(email, username, link, comments) {
+    function generateEmailLink(email, link, comments) {
       const subject = "MeSnap Setup Request";
       const body = `Hello,
 
 I would like to set up my MeSnap with the following details:
 
 Email: ${email}
-Username: ${username || "None"}
 Link: ${link}
 Comments: ${comments || "None"}
 
@@ -500,7 +493,6 @@ Thank you!`;
 
     function updateButtons() {
       const email = emailInput.value.trim();
-      const username = usernameInput.value.trim();
       const link = linkInput.value.trim();
       const comments = commentsInput.value.trim();
 
@@ -509,13 +501,13 @@ Thank you!`;
 
       if (emailValid && linkValid) {
         // Enable WhatsApp button
-        whatsappBtn.href = encodeMessage(email, username, link, comments);
+        whatsappBtn.href = encodeMessage(email, link, comments);
         whatsappBtn.removeAttribute("disabled");
         whatsappBtn.style.pointerEvents = "auto";
         whatsappBtn.style.opacity = "1";
 
         // Enable Email button
-        emailBtn.href = generateEmailLink(email, username, link, comments);
+        emailBtn.href = generateEmailLink(email, link, comments);
         emailBtn.removeAttribute("disabled");
         emailBtn.style.pointerEvents = "auto";
         emailBtn.style.opacity = "1";
